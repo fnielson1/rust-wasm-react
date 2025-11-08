@@ -1,0 +1,9 @@
+/* tslint:disable */
+/* eslint-disable */
+export const memory: WebAssembly.Memory;
+export const anger: () => void;
+export const greet: () => void;
+export const you: () => void;
+export const main: (a: number, b: number) => number;
+export const __wbindgen_externrefs: WebAssembly.Table;
+export const __wbindgen_start: () => void;

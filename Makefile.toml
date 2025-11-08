@@ -1,0 +1,27 @@
+[tasks.clippy]
+command = "cargo"
+# -D warnings treats all warnings as errors
+args = ["clippy", "--", "-D", "warnings"]
+
+[tasks.build]
+dependencies = ["clippy"]
+command = "cargo"
+args = ["build"]
+
+[tasks.build-wasm]
+dependencies = ["clippy"]
+command = "cargo"
+args = ["build", "--target", "wasm32-unknown-unknown"]
+
+[tasks.wasm]
+dependencies = ["build-wasm"]
+command = "wasm-bindgen"
+args = ["target/wasm32-unknown-unknown/debug/wasm-test.wasm", "--out-dir", "web", "--target", "web"]
+
+[tasks.run]
+dependencies = ["clippy"]
+command = "cargo"
+args = ["run"]
+
+[tasks.default]
+dependencies = ["build"]
