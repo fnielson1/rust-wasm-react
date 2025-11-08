@@ -1,18 +1,18 @@
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn greet() {
-    web_sys::console::log_1(&"Hello, world!".into());
+pub fn log(msg: String) {
+    web_sys::console::log_1(&msg.into());
 }
 
 #[wasm_bindgen]
-pub fn anger() {
-    web_sys::console::log_1(&"Hello, scum!".into());
+pub fn warn(msg: String) {
+    web_sys::console::warn_1(&msg.into());
 }
 
 #[wasm_bindgen]
-pub fn you() {
-    web_sys::console::log_1(&"Hello, you!".into());
+pub fn error(msg: String) {
+    web_sys::console::error_1(&msg.into());
 }
 
 fn main() {}

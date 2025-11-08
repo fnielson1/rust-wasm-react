@@ -4,12 +4,11 @@
     <meta charset="utf-8">
     <title>WASM Test</title>
     <script type="module">
-      import init, { greet, anger, you } from './wasm-test.js';
+      import init, { console } from './wasm-test.js';
       async function run() {
         await init();
-        greet();
-        anger();
-        you();
+        log("Custom message");
+        warn("This is a warning");
       }
       run();
     </script>

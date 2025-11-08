@@ -1,18 +1,20 @@
 /* tslint:disable */
 /* eslint-disable */
-export function anger(): void;
-export function you(): void;
-export function greet(): void;
+export function warn(msg: string): void;
+export function error(msg: string): void;
+export function log(msg: string): void;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly anger: () => void;
-  readonly greet: () => void;
-  readonly you: () => void;
+  readonly error: (a: number, b: number) => void;
+  readonly log: (a: number, b: number) => void;
+  readonly warn: (a: number, b: number) => void;
   readonly main: (a: number, b: number) => number;
   readonly __wbindgen_externrefs: WebAssembly.Table;
+  readonly __wbindgen_malloc: (a: number, b: number) => number;
+  readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
   readonly __wbindgen_start: () => void;
 }
 

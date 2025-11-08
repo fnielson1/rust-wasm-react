@@ -16,7 +16,19 @@ args = ["build", "--target", "wasm32-unknown-unknown"]
 [tasks.wasm]
 dependencies = ["build-wasm"]
 command = "wasm-bindgen"
-args = ["target/wasm32-unknown-unknown/debug/wasm-test.wasm", "--out-dir", "web", "--target", "web"]
+args = ["target/wasm32-unknown-unknown/debug/wasm-test.wasm",
+    "--out-dir", "web", "--target", "web"]
+
+[tasks.watch-wasm]
+command = "cargo"
+args = [
+    "watch",
+    "--ignore", "target/*",
+    "--ignore", "web/*",
+    "-x", "build --target wasm32-unknown-unknown",
+    "-s", "wasm-bindgen target/wasm32-unknown-unknown/debug/wasm-test.wasm --out-dir web --target web"
+]
+
 
 [tasks.run]
 dependencies = ["clippy"]
