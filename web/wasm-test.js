@@ -29,6 +29,12 @@ function getStringFromWasm0(ptr, len) {
     ptr = ptr >>> 0;
     return decodeText(ptr, len);
 }
+/**
+ * @param {number} iterations
+ */
+export function run_stress_test(iterations) {
+    wasm.run_stress_test(iterations);
+}
 
 let WASM_VECTOR_LEN = 0;
 
@@ -86,10 +92,10 @@ function passStringToWasm0(arg, malloc, realloc) {
 /**
  * @param {string} msg
  */
-export function warn(msg) {
+export function log(msg) {
     const ptr0 = passStringToWasm0(msg, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     const len0 = WASM_VECTOR_LEN;
-    wasm.warn(ptr0, len0);
+    wasm.log(ptr0, len0);
 }
 
 /**
@@ -104,10 +110,10 @@ export function error(msg) {
 /**
  * @param {string} msg
  */
-export function log(msg) {
+export function warn(msg) {
     const ptr0 = passStringToWasm0(msg, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     const len0 = WASM_VECTOR_LEN;
-    wasm.log(ptr0, len0);
+    wasm.warn(ptr0, len0);
 }
 
 const EXPECTED_RESPONSE_TYPES = new Set(['basic', 'cors', 'default']);
@@ -156,6 +162,10 @@ function __wbg_get_imports() {
     };
     imports.wbg.__wbg_log_8cec76766b8c0e33 = function(arg0) {
         console.log(arg0);
+    };
+    imports.wbg.__wbg_now_793306c526e2e3b6 = function() {
+        const ret = Date.now();
+        return ret;
     };
     imports.wbg.__wbg_warn_1d74dddbe2fd1dbb = function(arg0) {
         console.warn(arg0);

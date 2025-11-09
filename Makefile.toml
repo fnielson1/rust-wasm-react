@@ -8,10 +8,24 @@ dependencies = ["clippy"]
 command = "cargo"
 args = ["build"]
 
+[tasks.build-wasm-release]
+dependencies = ["clippy"]
+command = "cargo"
+args = ["build", "--release", "--target", "wasm32-unknown-unknown"]
+
 [tasks.build-wasm]
 dependencies = ["clippy"]
 command = "cargo"
 args = ["build", "--target", "wasm32-unknown-unknown"]
+
+[tasks.wasm-release]
+dependencies = ["build-wasm-release"]
+command = "wasm-bindgen"
+args = [
+    "target/wasm32-unknown-unknown/release/wasm-test.wasm",
+    "--out-dir", "web",
+    "--target", "web"
+]
 
 [tasks.wasm]
 dependencies = ["build-wasm"]
@@ -28,7 +42,6 @@ args = [
     "-x", "build --target wasm32-unknown-unknown",
     "-s", "wasm-bindgen target/wasm32-unknown-unknown/debug/wasm-test.wasm --out-dir web --target web"
 ]
-
 
 [tasks.run]
 dependencies = ["clippy"]
