@@ -7,4 +7,7 @@ node_modules
 # Web files
 *.d.ts
 *.js
+
+# Exceptions
 !/web/wasm-test.js
+!eslint.config.js
