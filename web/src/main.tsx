@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App'
-import init from '../wasm-test';
+import init from '../wasm_test';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -35,6 +35,3 @@ function jsStressTest(iterations: number) {
   console.log(`JS Stress test took ${elapsed} ms`);
 }
 run();
-
-
-

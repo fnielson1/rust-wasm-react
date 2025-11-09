@@ -13,25 +13,20 @@ dependencies = ["clippy"]
 command = "cargo"
 args = ["build", "--release", "--target", "wasm32-unknown-unknown"]
 
+[tasks.wasm-release]
+dependencies = ["build-wasm-release"]
+command = "wasm-pack"
+args = ["build", "--release", "--target", "web", "--out-dir", "web"]
+
 [tasks.build-wasm]
 dependencies = ["clippy"]
 command = "cargo"
 args = ["build", "--target", "wasm32-unknown-unknown"]
 
-[tasks.wasm-release]
-dependencies = ["build-wasm-release"]
-command = "wasm-bindgen"
-args = [
-    "target/wasm32-unknown-unknown/release/wasm-test.wasm",
-    "--out-dir", "web",
-    "--target", "web"
-]
-
 [tasks.wasm]
 dependencies = ["build-wasm"]
-command = "wasm-bindgen"
-args = ["target/wasm32-unknown-unknown/debug/wasm-test.wasm",
-    "--out-dir", "web", "--target", "web"]
+command = "wasm-pack"
+args = ["build", "--dev", "--target", "web", "--out-dir", "web"]
 
 [tasks.watch-wasm]
 command = "cargo"
@@ -40,7 +35,7 @@ args = [
     "--ignore", "target/*",
     "--ignore", "web/*",
     "-x", "build --target wasm32-unknown-unknown",
-    "-s", "wasm-bindgen target/wasm32-unknown-unknown/debug/wasm-test.wasm --out-dir web --target web"
+    "-s", "wasm-pack build --dev --out-dir web --target web"
 ]
 
 [tasks.run]
