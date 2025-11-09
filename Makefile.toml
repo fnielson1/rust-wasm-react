@@ -35,10 +35,5 @@ args = [
     "-s", "wasm-pack build --dev --out-dir web/src/pkg --target web --no-pack",
 ]
 
-[tasks.run]
-dependencies = ["clippy"]
-command = "cargo"
-args = ["run"]
-
 [tasks.default]
 dependencies = ["build-wasm"]
