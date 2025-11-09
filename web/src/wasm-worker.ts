@@ -1,4 +1,4 @@
-import init, { run_stress_test } from '../wasm_test';
+import init, { run_stress_test } from './pkg/wasm_test';
 
 self.onmessage = async function (e: MessageEvent<{ iterations: number }>) {
   const {iterations} = e.data;

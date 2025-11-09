@@ -2,7 +2,6 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App'
-import init from '../wasm_test';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -12,7 +11,8 @@ createRoot(document.getElementById('root')!).render(
 
 const iterations = 9000000;
 async function run() {
-  await init();
+  jsStressTest(iterations);
+
   // Run WASM stress test in a Web Worker
   const worker = new Worker('./src/wasm-worker.ts', { type: 'module' });
   worker.postMessage({ iterations: iterations });
@@ -20,7 +20,6 @@ async function run() {
     console.log('Worker:', e.data);
   };
   // JS stress test runs on main thread
-  jsStressTest(iterations);
 }
 
 function jsStressTest(iterations: number) {

@@ -3,11 +3,7 @@ command = "cargo"
 # -D warnings treats all warnings as errors
 args = ["clippy", "--", "-D", "warnings"]
 
-[tasks.build]
-dependencies = ["clippy"]
-command = "cargo"
-args = ["build"]
-
+# Release
 [tasks.build-wasm-release]
 dependencies = ["clippy"]
 command = "cargo"
@@ -16,8 +12,9 @@ args = ["build", "--release", "--target", "wasm32-unknown-unknown"]
 [tasks.wasm-release]
 dependencies = ["build-wasm-release"]
 command = "wasm-pack"
-args = ["build", "--release", "--target", "web", "--out-dir", "web"]
+args = ["build", "--release", "--target", "web", "--out-dir", "web/src/pkg", "--no-pack"]
 
+# Dev
 [tasks.build-wasm]
 dependencies = ["clippy"]
 command = "cargo"
@@ -26,7 +23,7 @@ args = ["build", "--target", "wasm32-unknown-unknown"]
 [tasks.wasm]
 dependencies = ["build-wasm"]
 command = "wasm-pack"
-args = ["build", "--dev", "--target", "web", "--out-dir", "web"]
+args = ["build", "--dev", "--target", "web", "--out-dir", "web/src/pkg", "--no-pack"]
 
 [tasks.watch-wasm]
 command = "cargo"
@@ -35,7 +32,7 @@ args = [
     "--ignore", "target/*",
     "--ignore", "web/*",
     "-x", "build --target wasm32-unknown-unknown",
-    "-s", "wasm-pack build --dev --out-dir web --target web"
+    "-s", "wasm-pack build --dev --out-dir web/src/pkg --target web --no-pack",
 ]
 
 [tasks.run]
@@ -44,4 +41,4 @@ command = "cargo"
 args = ["run"]
 
 [tasks.default]
-dependencies = ["build"]
+dependencies = ["build-wasm"]
